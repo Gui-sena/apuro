@@ -1,48 +1,48 @@
 const express = require('express');
-const studentSchema = require('../models/student');
+const teacherSchema = require('../models/teacher');
 
 const router = express.Router();
 
-// create student
+// create teacher
 router.post('/', (req, res) => {
-    const student = studentSchema(req.body);
-    student
+    const teacher = teacherSchema(req.body);
+    teacher
         .save()
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
 
-// get all students
+// get all teachers
 router.get('/getAll', (req, res) => {
-    studentSchema
+    teacherSchema
         .find()
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }))
 });
 
-// get a student
+// get a teacher
 router.get('/:id', (req, res) => {
     const { id } = req.params;
-    studentSchema
+    teacherSchema
         .findById(id)
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
 
-// update a student
+// update a teacher
 router.put('/:id', (req, res) => {
     const { id } = req.params;
     const { name, email } = req.body;
-    studentSchema
+    teacherSchema
         .updateOne({_id: id}, { $set: {name, email} })
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
 
-// delete a student
+// delete a teacher
 router.delete('/:id', (req, res) =>{
     const { id } = req.params;
-    studentSchema
+    teacherSchema
         .remove({_id: id})
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
