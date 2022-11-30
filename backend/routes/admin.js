@@ -1,58 +1,40 @@
 const express = require('express');
-const studentSchema = require('../models/student');
+const adminSchema = require('../models/admin');
 
 const router = express.Router();
 
-// create student
+// create admin
 router.post('/', (req, res) => {
-    const student = studentSchema(req.body);
-    student
+    const admin = adminSchema(req.body);
+    admin
         .save()
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
 
-// get all students
-router.get('/getAll', (req, res) => {
-    studentSchema
-        .find()
-        .then((data) => res.json(data))
-        .catch((error) => res.json({ message: error }))
-});
-
-// get a student
+// get a admin
 router.get('/:id', (req, res) => {
     const { id } = req.params;
-    studentSchema
+    adminSchema
         .findById(id)
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
 
-// update a student
+// update a admin
 router.put('/:id', (req, res) => {
     const { id } = req.params;
     const { name, email, password } = req.body;
-    studentSchema
+    adminSchema
         .updateOne({_id: id}, { $set: {name, email, password} })
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
 
-// disable student
-router.put('/:id', (req, res) => {
-    const { id } = req.params;
-    const { active } = req.body;
-    studentSchema
-        .updateOne({_id: id}, { $set: {active} })
-        .then((data) => res.json(data))
-        .catch((error) => res.json({ message: error }));
-});
-
-// delete a student
+// delete a admin
 router.delete('/:id', (req, res) =>{
     const { id } = req.params;
-    studentSchema
+    adminSchema
         .remove({_id: id})
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));

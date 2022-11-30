@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const studentSchema = mongoose.Schema({
+const adminSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -13,10 +13,7 @@ const studentSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
-    },
-    active: {
-        type: Boolean
     }
 });
 
-module.exports = mongoose.model('Student', studentSchema);
+module.exports = mongoose.model('admin', adminSchema);

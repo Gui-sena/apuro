@@ -32,12 +32,23 @@ router.get('/:id', (req, res) => {
 // update a teacher
 router.put('/:id', (req, res) => {
     const { id } = req.params;
-    const { name, email } = req.body;
+    const { name, email, password } = req.body;
     teacherSchema
-        .updateOne({_id: id}, { $set: {name, email} })
+        .updateOne({_id: id}, { $set: {name, email, password} })
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
 });
+
+// disable teacher
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const { active } = req.body;
+    teacherSchema
+        .updateOne({_id: id}, { $set: {active} })
+        .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+});
+
 
 // delete a teacher
 router.delete('/:id', (req, res) =>{
